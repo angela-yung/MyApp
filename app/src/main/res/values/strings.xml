@@ -3,5 +3,5 @@
     <string name="Enter">Enter</string>
     <string name="Answer">Answer</string>
     <string name="Question">Question</string>
-    <string name="Hint">SomeHint</string>
+    <string name="Hint">Type your answer here</string>
 </resources>
