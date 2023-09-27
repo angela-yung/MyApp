@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">MyApp</string>
-    <string name="Enter">Enter</string>
-    <string name="Answer">Answer</string>
-    <string name="Question">Question</string>
-    <string name="Hint">Type your answer here</string>
+    <string name="enter">Enter</string>
+    <string name="answer">Answer</string>
+    <string name="question">Question</string>
+    <string name="typeYourAnswer">Type your answer here</string>
+    <string name="next">Next</string>
+    <string name="hint">Hint</string>
+    <string name="hintBar">Hint Bar</string>
 </resources>
