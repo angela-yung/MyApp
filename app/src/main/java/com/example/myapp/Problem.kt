@@ -21,11 +21,11 @@ class Problem (private var question:String, private var answer:String, private v
     fun getPartialSolution() : String {
         var partialSolution = answer
         Log.d(TAG, "get partial solution answer.length = $answer.length")
-        var maxCharsHidden = answer.length - 1
-        var numCharsHidden = if (answer.length == 1) {
+        val maxCharsHidden = answer.length - 1
+        val numCharsHidden = if (answer.length == 1) {
             1
         } else {
-            (MIN_CHARS_HIDDEN..maxCharsHidden).random()
+            ((MIN_CHARS_HIDDEN + maxCharsHidden)/2..maxCharsHidden).random()
         }
         Log.d(TAG, "get partial solution randomNum = $numCharsHidden")
 
@@ -37,8 +37,20 @@ class Problem (private var question:String, private var answer:String, private v
             }
             Log.d(TAG, "get partial solution randomIndex = $randomIndex")
             partialSolution = partialSolution.replaceRange(randomIndex, randomIndex + 1, "_")
+
+            // Ensure spaces are not replaced by underscores
+            var copy = answer
+            while (true) {
+                var spaceIndex = copy.indexOf(' ')
+                if (spaceIndex == -1) {
+                    break
+                }
+                partialSolution = partialSolution.replaceRange(spaceIndex, spaceIndex + 1, " ")
+                copy = copy.replaceRange(spaceIndex, spaceIndex + 1, "_")
+            }
             prevRandomIndex = randomIndex
         }
+        Log.d(TAG, "get partial solution partialSolution = $partialSolution")
         return partialSolution
     }
 
