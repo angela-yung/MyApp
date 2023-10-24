@@ -8,4 +8,12 @@
     <string name="hint">Hint</string>
     <string name="hintBar">Hint Bar</string>
     <string name="revealAnswer">Reveal</string>
+    <string name="startButton">Start</string>
+    <string name="randomTriviaButton">Random Trivia</string>
+    <string name="historyButton">History</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="randomTriviaCD">random trivia image button</string>
+    <string name="iv_categoryContentDescription">background</string>
+    <string name="tv_categoryText">Category Name</string>
 </resources>

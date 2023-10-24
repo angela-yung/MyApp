@@ -1,10 +1,10 @@
-package com.example.myapp
+package com.example.myapp.model
 
 import android.util.Log
 
 private const val TAG = "Problem"
-//private const val MAX_CHARS_HIDDEN = 2
 private const val MIN_CHARS_HIDDEN = 1
+
 class Problem (private var question:String, private var answer:String, private var id:Int) {
     fun getQuestion() : String {
         return question
@@ -13,10 +13,6 @@ class Problem (private var question:String, private var answer:String, private v
     fun getAnswer() : String {
         return answer
     }
-
-//    fun getLengthOfSolution() : Int {
-//        return answer.length
-//    }
 
     fun getPartialSolution() : String {
         var partialSolution = answer

@@ -1,0 +1,108 @@
+package com.example.myapp.view
+
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myapp.databinding.ActivitySolveBinding
+import com.example.myapp.model.Problem
+import com.example.myapp.model.ProblemSetManager
+
+private const val TAG : String = "SolveActivity"
+private const val DEFAULT_CATEGORY : String = "Random Trivia"
+
+class SolveActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySolveBinding
+    private var currentCategory = DEFAULT_CATEGORY
+    private var randomId : Int = 0
+    private var problemSetManager = ProblemSetManager()
+    private var currentProblemSet = problemSetManager.getProblemSet(DEFAULT_CATEGORY)
+    private lateinit var currentProblem : Problem
+    private var isHintClicked = false
+    private var isRevealed = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySolveBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        var extras = intent.extras
+        if (extras != null) {
+            currentCategory = extras.getString("category") ?: DEFAULT_CATEGORY
+            Log.d(TAG, "imported the category $currentCategory from SelectCategoryActivity")
+        }
+        updateCurrentProblem()
+        displayQuestion()
+//        Log.d(TAG, "currentProblem = $currentProblem")
+
+        binding.btnEnter.setOnClickListener {
+            val answer = binding.etAnswer.text.toString()
+            Log.d(TAG, "answer = $answer")
+            if (answer.equals(problemSetManager.getProblemByCategoryAndId(currentCategory, randomId)?.getAnswer(), true)) {
+                Toast.makeText(this@SolveActivity, "Correct!", Toast.LENGTH_SHORT).show()
+                nextQuestion()
+                resetProblem()
+            } else {
+                Toast.makeText(this@SolveActivity, "Incorrect!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.btnNext.setOnClickListener {
+            nextQuestion()
+            resetProblem()
+        }
+
+        binding.btnHint.setOnClickListener {
+            if (!isHintClicked && !isRevealed) {
+                binding.tvHintBar.text = currentProblem.getPartialSolution()
+                isHintClicked = true
+            }
+            Toast.makeText(this@SolveActivity, "Hint Pressed", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnRevealAnswer.setOnClickListener {
+            binding.tvHintBar.text = currentProblem.getAnswer()
+            isRevealed = true
+            Toast.makeText(this@SolveActivity, "Reveal Answer Pressed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun resetProblem() {
+        binding.etAnswer.text.clear()
+        binding.tvHintBar.text = ""
+        isHintClicked = false
+        isRevealed = false
+    }
+
+    private fun getNewProblem() : Problem {
+        val problem : Problem?
+
+        val prevRandomId = randomId
+        while (randomId == prevRandomId) {
+            randomId = (1..(currentProblemSet?.getProblemListCount() ?: throw Exception ("Null problem set: failed to get problem list count"))).random()
+        }
+        Log.d(TAG, "getNewProblem() randomNum = $randomId")
+        Log.d(TAG, "getNewProblem() category = $currentCategory")
+
+        problem = problemSetManager.getProblemByCategoryAndId(currentCategory, randomId) ?: throw Exception("Failed getProblemByCategoryAndId()")
+
+        return problem
+    }
+
+    private fun updateCurrentProblem() {
+        try {
+            currentProblem = getNewProblem()
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception: $e")
+        }
+    }
+
+    private fun displayQuestion() {
+        binding.tvQuestion.text = currentProblem.getQuestion()
+    }
+
+    private fun nextQuestion() {
+        updateCurrentProblem()
+        displayQuestion()
+    }
+}
