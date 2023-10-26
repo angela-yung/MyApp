@@ -1,18 +1,18 @@
-package com.example.myapp.view
+package com.example.myapp.view.categories
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
 import com.example.myapp.databinding.ActivitySelectCategoryBinding
 import com.example.myapp.model.Category
-import com.example.myapp.model.RecyclerViewCategoryAdapter
 
 private const val TAG = "SelectCategoryActivity"
 private const val PARAGRAPHS_CATEGORY = "Paragraphs"
 private const val HISTORY_CATEGORY = "History"
 private const val RANDOM_TRIVIA_CATEGORY = "Random Trivia"
+
 class SelectCategoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectCategoryBinding
     private var recyclerView : RecyclerView? = null

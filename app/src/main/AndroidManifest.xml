@@ -21,13 +21,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.SelectCategoryActivity"
+            android:name=".view.categories.SelectCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SolveActivity"
+            android:name=".view.demo.SolveActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
         </activity>
+        <activity
+            android:name=".view.paragraphs.ParagraphsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity
+            android:name=".view.paragraphs.EndOfExerciseActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+
     </application>
 
 </manifest>

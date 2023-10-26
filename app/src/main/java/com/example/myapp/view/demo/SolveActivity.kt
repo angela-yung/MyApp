@@ -1,4 +1,4 @@
-package com.example.myapp.view
+package com.example.myapp.view.demo
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapp.databinding.ActivitySolveBinding
 import com.example.myapp.model.Problem
 import com.example.myapp.model.ProblemSetManager
+import com.example.myapp.view.categories.SelectCategoryActivity
 
 private const val TAG : String = "SolveActivity"
 private const val DEFAULT_CATEGORY : String = "Random Trivia"
@@ -18,7 +19,7 @@ class SolveActivity : AppCompatActivity() {
     private var randomId : Int = 0
     private var problemSetManager = ProblemSetManager()
     private var currentProblemSet = problemSetManager.getProblemSet(DEFAULT_CATEGORY)
-    private lateinit var currentProblem : Problem
+    private var currentProblem : Problem? = null
     private var isHintClicked = false
     private var isRevealed = false
 
@@ -29,8 +30,10 @@ class SolveActivity : AppCompatActivity() {
         setContentView(view)
         var extras = intent.extras
         if (extras != null) {
-            currentCategory = extras.getString("category") ?: DEFAULT_CATEGORY
             Log.d(TAG, "imported the category $currentCategory from SelectCategoryActivity")
+            currentCategory = extras.getString("category") ?: DEFAULT_CATEGORY
+            Log.d(TAG, "current category = $currentCategory")
+            currentProblemSet = problemSetManager.getProblemSet(currentCategory)
         }
         updateCurrentProblem()
         displayQuestion()
@@ -55,14 +58,14 @@ class SolveActivity : AppCompatActivity() {
 
         binding.btnHint.setOnClickListener {
             if (!isHintClicked && !isRevealed) {
-                binding.tvHintBar.text = currentProblem.getPartialSolution()
+                binding.tvHintBar.text = currentProblem?.getPartialSolution() ?: throw Exception("Null currentProblem: failed to get partial solution")
                 isHintClicked = true
             }
             Toast.makeText(this@SolveActivity, "Hint Pressed", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnRevealAnswer.setOnClickListener {
-            binding.tvHintBar.text = currentProblem.getAnswer()
+            binding.tvHintBar.text = currentProblem?.getAnswer() ?: throw Exception("Null currentProblem: failed to get answer")
             isRevealed = true
             Toast.makeText(this@SolveActivity, "Reveal Answer Pressed", Toast.LENGTH_SHORT).show()
         }
@@ -93,9 +96,7 @@ class SolveActivity : AppCompatActivity() {
         }
         Log.d(TAG, "getNewProblem() randomNum = $randomId")
         Log.d(TAG, "getNewProblem() category = $currentCategory")
-
         problem = problemSetManager.getProblemByCategoryAndId(currentCategory, randomId) ?: throw Exception("Failed getProblemByCategoryAndId()")
-
         return problem
     }
 
@@ -108,7 +109,7 @@ class SolveActivity : AppCompatActivity() {
     }
 
     private fun displayQuestion() {
-        binding.tvQuestionBar.text = currentProblem.getQuestion()
+        binding.tvQuestionBar.text = currentProblem?.getQuestion() ?: throw Exception("Null currentProblem: failed to get question")
     }
 
     private fun nextQuestion() {

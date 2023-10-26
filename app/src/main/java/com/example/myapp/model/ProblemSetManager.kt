@@ -14,11 +14,6 @@ class ProblemSetManager () {
     init {
         // Initialize list of problems in each category
 
-        // Paragraphs
-        var paragraphProblems1 = mutableListOf<Problem>(
-            Problem("")
-        )
-
         // Random Trivia
         var randomTriviaProblems = mutableListOf<Problem>(
             Problem("What is the rarest blood type?", "AB-", null, problemIdCounter.incrementAndGet()),

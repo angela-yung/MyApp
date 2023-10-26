@@ -23,4 +23,7 @@
     <string name="yes_button">Yes</string>
     <string name="no_button">No</string>
     <string name="temporary_correct">Correct!</string>
+    <string name="temp_end_of_exercise">You completed the exercise with a score of:</string>
+    <string name="temp_score">4 / 5</string>
+    <string name="proceed_message">Begin the next exercise?</string>
 </resources>

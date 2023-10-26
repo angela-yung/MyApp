@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapp.databinding.ActivityMainBinding
-import com.example.myapp.view.SelectCategoryActivity
+import com.example.myapp.view.categories.SelectCategoryActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

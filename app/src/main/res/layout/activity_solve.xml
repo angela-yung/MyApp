@@ -5,7 +5,7 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SolveActivity">
+    tools:context=".view.demo.SolveActivity">
 
     <TextView
         android:id="@+id/tv_questionBar"
@@ -28,16 +28,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iV_question"
-        tools:layout_editor_absoluteY="390dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_revealAnswer"
         tools:text="@string/hintBar" />
 
     <EditText
@@ -45,6 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="answer"
         android:ems="10"
@@ -58,35 +59,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hintBar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_questionBar"
         tools:text="@string/answer" />
-
-    <Button
-        android:id="@+id/btn_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/hint"
-        app:layout_constraintEnd_toStartOf="@+id/btn_next"
-        app:layout_constraintStart_toEndOf="@+id/btn_revealAnswer"
-        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_hint"
 
+        app:layout_constraintStart_toEndOf="@id/btn_hint"
         app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
     <Button
         android:id="@+id/btn_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/holo_green_dark"
         android:text="@string/enter"
         app:layout_constraintEnd_toStartOf="@id/btn_revealAnswer"
@@ -97,10 +88,20 @@
         android:id="@+id/btn_revealAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/revealAnswer"
         app:layout_constraintEnd_toStartOf="@+id/btn_hint"
         app:layout_constraintStart_toEndOf="@+id/btn_enter"
+        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
+
+    <Button
+        android:id="@+id/btn_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/hint"
+        app:layout_constraintEnd_toStartOf="@+id/btn_next"
+        app:layout_constraintStart_toEndOf="@+id/btn_revealAnswer"
         app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
     <ImageButton
@@ -108,13 +109,12 @@
         android:layout_width="38dp"
         android:layout_height="21dp"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
         android:background="@color/white"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_enter"
-        app:layout_constraintVertical_bias="0.973"
         app:srcCompat="@drawable/back_arrow" />
 
     <ImageView
@@ -123,11 +123,13 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tv_questionBar"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/colosseum_icon"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hintBar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/colosseum_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

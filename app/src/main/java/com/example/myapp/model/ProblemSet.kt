@@ -1,6 +1,9 @@
 package com.example.myapp.model
 
-class ProblemSet (private var category : String, private var problemList : MutableList<Problem>) {
+import java.io.Serializable
+
+class ProblemSet (private var category : String, private var problemList : MutableList<Problem>) :
+    Serializable {
     fun getCategory() : String {
         return category
     }
