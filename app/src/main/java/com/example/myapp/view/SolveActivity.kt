@@ -1,5 +1,6 @@
 package com.example.myapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -65,6 +66,15 @@ class SolveActivity : AppCompatActivity() {
             isRevealed = true
             Toast.makeText(this@SolveActivity, "Reveal Answer Pressed", Toast.LENGTH_SHORT).show()
         }
+
+        binding.iBtnBackArrow.setOnClickListener {
+            returnToCategorySelection()
+        }
+    }
+
+    private fun returnToCategorySelection() {
+        val intent = Intent(this, SelectCategoryActivity::class.java)
+        startActivity(intent)
     }
 
     private fun resetProblem() {
@@ -79,7 +89,7 @@ class SolveActivity : AppCompatActivity() {
 
         val prevRandomId = randomId
         while (randomId == prevRandomId) {
-            randomId = (1..(currentProblemSet?.getProblemListCount() ?: throw Exception ("Null problem set: failed to get problem list count"))).random()
+            randomId = (1..(currentProblemSet?.getProblemSetCount() ?: throw Exception ("Null problem set: failed to get problem list count"))).random()
         }
         Log.d(TAG, "getNewProblem() randomNum = $randomId")
         Log.d(TAG, "getNewProblem() category = $currentCategory")
@@ -98,7 +108,7 @@ class SolveActivity : AppCompatActivity() {
     }
 
     private fun displayQuestion() {
-        binding.tvQuestion.text = currentProblem.getQuestion()
+        binding.tvQuestionBar.text = currentProblem.getQuestion()
     }
 
     private fun nextQuestion() {

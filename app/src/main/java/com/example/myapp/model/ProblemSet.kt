@@ -5,11 +5,11 @@ class ProblemSet (private var category : String, private var problemList : Mutab
         return category
     }
 
-    fun getProblemList() : MutableList<Problem> {
+    fun getProblemSet() : MutableList<Problem> {
         return problemList
     }
 
-    fun getProblemListCount() : Int {
+    fun getProblemSetCount() : Int {
         return problemList.count()
     }
 

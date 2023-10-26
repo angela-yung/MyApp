@@ -8,7 +8,7 @@
     tools:context=".view.SolveActivity">
 
     <TextView
-        android:id="@+id/tv_question"
+        android:id="@+id/tv_questionBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -18,18 +18,33 @@
         android:paddingBottom="8dp"
         android:text="@string/question"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_hintBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_hintBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iV_question"
+        tools:layout_editor_absoluteY="390dp"
+        tools:text="@string/hintBar" />
 
     <EditText
         android:id="@+id/et_answer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="answer"
         android:ems="10"
@@ -47,69 +62,72 @@
         tools:text="@string/answer" />
 
     <Button
-        android:id="@+id/btn_enter"
+        android:id="@+id/btn_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="200dp"
-        android:text="@string/enter"
+        android:layout_marginTop="20dp"
+        android:text="@string/hint"
         app:layout_constraintEnd_toStartOf="@+id/btn_next"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_revealAnswer"
         app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_enter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_enter"
-        app:layout_constraintTop_toBottomOf="@+id/et_answer"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@id/btn_hint"
+
+        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
     <Button
-        android:id="@+id/btn_hint"
+        android:id="@+id/btn_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/hint"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_revealAnswer" />
-
-    <TextView
-        android:id="@+id/tv_hintBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textAlignment="viewStart"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_answer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="@string/enter"
+        app:layout_constraintEnd_toStartOf="@id/btn_revealAnswer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_question"
-        tools:text="@string/hintBar" />
+        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
     <Button
         android:id="@+id/btn_revealAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/revealAnswer"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_hint"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btn_enter"
+        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
+
+    <ImageButton
+        android:id="@+id/iBtn_backArrow"
+        android:layout_width="38dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:adjustViewBounds="true"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_enter"
+        app:layout_constraintVertical_bias="0.973"
+        app:srcCompat="@drawable/back_arrow" />
+
+    <ImageView
+        android:id="@+id/iV_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_questionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/colosseum_icon"
+        tools:layout_editor_absoluteX="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

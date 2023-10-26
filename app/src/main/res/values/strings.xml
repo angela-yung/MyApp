@@ -16,4 +16,11 @@
     <string name="randomTriviaCD">random trivia image button</string>
     <string name="iv_categoryContentDescription">background</string>
     <string name="tv_categoryText">Category Name</string>
+    <string name="menuButton">Menu</string>
+    <string name="sample_paragraph">This is a sample paragraph. Blah blah blah!</string>
+    <string name="sample_question">This is a question.</string>
+    <string name="paragraph_instructions">Read the paragraph. Then answer the question.</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="temporary_correct">Correct!</string>
 </resources>

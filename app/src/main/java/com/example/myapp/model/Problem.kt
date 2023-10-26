@@ -5,7 +5,7 @@ import android.util.Log
 private const val TAG = "Problem"
 private const val MIN_CHARS_HIDDEN = 1
 
-class Problem (private var question:String, private var answer:String, private var id:Int) {
+class Problem(private var question:String, private var answer:String, private var image: Int?, private var id:Int) {
     fun getQuestion() : String {
         return question
     }

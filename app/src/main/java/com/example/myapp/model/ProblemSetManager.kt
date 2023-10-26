@@ -13,24 +13,30 @@ class ProblemSetManager () {
 
     init {
         // Initialize list of problems in each category
+
+        // Paragraphs
+        var paragraphProblems1 = mutableListOf<Problem>(
+            Problem("")
+        )
+
         // Random Trivia
         var randomTriviaProblems = mutableListOf<Problem>(
-            Problem("What is the rarest blood type?", "AB-", problemIdCounter.incrementAndGet()),
+            Problem("What is the rarest blood type?", "AB-", null, problemIdCounter.incrementAndGet()),
             Problem(
                 "What is the name of the largest freshwater lake in the world?",
-                "Lake Superior",
+                "Lake Superior", null,
                 problemIdCounter.incrementAndGet()
             ),
-            Problem("What is the capital city of Spain?", "Madrid", problemIdCounter.incrementAndGet()),
+            Problem("What is the capital city of Spain?", "Madrid", null, problemIdCounter.incrementAndGet()),
             Problem(
                 "What is the capital city of Australia?",
-                "Canberra",
+                "Canberra", null,
                 problemIdCounter.incrementAndGet()
             ),
-            Problem("What is the capital city of Canada?", "Ottawa", problemIdCounter.incrementAndGet()),
+            Problem("What is the capital city of Canada?", "Ottawa", null, problemIdCounter.incrementAndGet()),
             Problem(
                 "How many elements are there in the periodic table?",
-                "118",
+                "118", null,
                 problemIdCounter.incrementAndGet()
             )
         )
@@ -42,21 +48,21 @@ class ProblemSetManager () {
 
         // History
         var historyProblems = mutableListOf<Problem>(
-            Problem("What year did World War I begin?", "1914", problemIdCounter.incrementAndGet()),
-            Problem("What year did World War II begin?", "1939", problemIdCounter.incrementAndGet()),
+            Problem("What year did World War I begin?", "1914", null, problemIdCounter.incrementAndGet()),
+            Problem("What year did World War II begin?", "1939", null, problemIdCounter.incrementAndGet()),
             Problem(
                 "What year did the United States declare independence?",
-                "1776",
+                "1776", null,
                 problemIdCounter.incrementAndGet()
             ),
             Problem(
                 "One of the ancient world wonders, the “Hanging Gardens,” was found in which city?",
-                "Babylon",
+                "Babylon", null,
                 problemIdCounter.incrementAndGet()
             ),
             Problem(
                 "Who was the first man to walk on the moon?",
-                "Neil Armstrong",
+                "Neil Armstrong", null,
                 problemIdCounter.incrementAndGet()
             )
         )
@@ -76,7 +82,7 @@ class ProblemSetManager () {
             return null
         }
 
-        var problem = problemSet.getProblemList().find { it.getId() == id }
+        var problem = problemSet.getProblemSet().find { it.getId() == id }
         if (problem == null) {
             Log.e(TAG, "Could not associate a Problem with that ID.")
             return null
