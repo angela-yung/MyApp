@@ -1,11 +1,12 @@
 package com.example.myapp.model
 
 import android.util.Log
+import java.io.Serializable
 
 private const val TAG = "Problem"
 private const val MIN_CHARS_HIDDEN = 1
 
-class Problem(private var question:String, private var answer:String, private var image: Int?, private var id:Int) {
+class Problem(private var question:String, private var answer:String, private var image: Int?, private var id:Int) : Serializable {
     fun getQuestion() : String {
         return question
     }
