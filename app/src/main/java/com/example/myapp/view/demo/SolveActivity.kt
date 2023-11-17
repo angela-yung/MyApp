@@ -70,7 +70,7 @@ class SolveActivity : AppCompatActivity() {
             Toast.makeText(this@SolveActivity, "Reveal Answer Pressed", Toast.LENGTH_SHORT).show()
         }
 
-        binding.iBtnBackArrow.setOnClickListener {
+        binding.btnBack1.setOnClickListener {
             returnToCategorySelection()
         }
     }

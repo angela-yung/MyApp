@@ -16,11 +16,11 @@ class ParagraphsActivity: AppCompatActivity() {
     private lateinit var binding: ActivityParagraphsBinding
     private var paragraphs = HashMap<String, ProblemSet>()
     private var problemIdCounter = AtomicInteger()
-    private var totalNumProblems = 0
+    private var total = -1
     private var currentParagraph = ""
     private var currentProblemSet = ProblemSet(CATEGORY_NAME, mutableListOf<Problem>())
     private var currentProblem = Problem("", "", null, 0)
-//    private var shuffledMap = LinkedHashMap<String, ProblemSet>()
+    private var shuffledKeys = ArrayList<String>()
     private var score = 0
 
     init {
@@ -37,20 +37,21 @@ class ParagraphsActivity: AppCompatActivity() {
         if (extras != null) {
 //            var temp = intent.getSerializableExtra("paragraphs") as HashMap<String, ProblemSet>
             try {
-                paragraphs = intent.getSerializableExtra("paragraphs") as HashMap<String, ProblemSet>
+                shuffledKeys = intent.getSerializableExtra("shuffledKeys") as ArrayList<String>
 //                paragraphs = temp.toMap() as LinkedHashMap<String, ProblemSet>
-                Log.d(TAG, "intent received the following paragraphs: ")
-                logRemainingParagraphs()
+                Log.d(TAG, "intent received the following keys: ")
+                logShuffledKeys()
+//                logRemainingParagraphs()
             } catch (e: Exception) {
                 Log.e(TAG, "Exception: $e")
-                Log.e(TAG, "paragraphs is null")
+                Log.e(TAG, "keys is null")
             }
 
         } else {
             shuffleParagraphs()
             Log.d(TAG, "Paragraphs after shuffling initially: ")
-            logRemainingParagraphs()
-            totalNumProblems = paragraphs.size
+//            logRemainingParagraphs()
+            logShuffledKeys()
         }
 
 //        if (savedInstanceState != null) {
@@ -65,7 +66,7 @@ class ParagraphsActivity: AppCompatActivity() {
 //            logRemainingParagraphs()
 //        }
 
-        if (isEmptyParagraphs()) {
+        if (isEmptyKeys()) {
             // No more paragraphs left, go to menu
             Log.d(TAG, "No more paragraphs left, going to menu")
             returnToCategorySelection()
@@ -74,6 +75,7 @@ class ParagraphsActivity: AppCompatActivity() {
             updateProblem()
             updateDisplay()
         }
+
         binding.btnYes.setOnClickListener() {
             // Extract below to a new method called checkAnswer() and use for btnYes and btnNo
             checkAnswer("Yes")
@@ -117,8 +119,9 @@ class ParagraphsActivity: AppCompatActivity() {
         } else {
             // No questions left in this problem set
             Log.d(TAG, "paragraphs before sending to EndOfExerciseActivity: ")
-            logRemainingParagraphs()
-            Log.d(TAG, "Map type: ${paragraphs.javaClass}")
+            logShuffledKeys()
+//            logRemainingParagraphs()
+//            Log.d(TAG, "Map type: ${paragraphs.javaClass}")
             loadEndOfExercise()
         }
         updateDisplay()
@@ -138,50 +141,57 @@ class ParagraphsActivity: AppCompatActivity() {
         return currentProblemSet.getProblemSetCount() == 0
     }
 
-    private fun isEmptyParagraphs() : Boolean {
-        return paragraphs.size == 0
+    private fun isEmptyKeys() : Boolean {
+        return shuffledKeys.size == 0
     }
 
     private fun updateParagraphAndProblemSet() {
-        currentParagraph = paragraphs.keys.first()
-        currentProblemSet = paragraphs.values.first()
-        paragraphs.remove(currentParagraph)
-        Log.d(TAG, "number of paragraphs remaining after removing current paragraph = ${paragraphs?.size}")
+        val firstKey = shuffledKeys.first()
+        currentParagraph = firstKey
+        currentProblemSet = paragraphs[firstKey]!!
+        total = currentProblemSet.getProblemSetCount()
+        Log.d(TAG, "getProblemSetCount = $total")
+        shuffledKeys.remove(firstKey)
+//        paragraphs.remove(currentParagraph)
+        Log.d(TAG, "number of paragraphs remaining after removing current paragraph = ${shuffledKeys?.size}")
     }
 
-    private fun logRemainingParagraphs() {
-        for (paragraph in paragraphs.keys) {
-            Log.d(TAG, "paragraph = $paragraph")
+//    private fun logRemainingParagraphs() {
+//        for (paragraph in paragraphs.keys) {
+//            Log.d(TAG, "paragraph = $paragraph")
+//        }
+//    }
+
+    private fun logShuffledKeys() {
+        for (key in shuffledKeys) {
+            Log.d(TAG, "paragraph = $key")
         }
     }
 
-
     private fun loadEndOfExercise() {
         val intent = Intent(this, EndOfExerciseActivity::class.java)
-        intent.putExtra("paragraphs", paragraphs)
-        intent.putExtra("score", score)
-        intent.putExtra("totalScore", totalNumProblems)
+        intent.putExtra("shuffledKeys", shuffledKeys)
+        intent.putExtra("score", score.toString())
+        Log.d(TAG, "The value of total before sending to EndOfExercise = $total")
+        intent.putExtra("total", total.toString())
         startActivity(intent)
     }
 
     private fun shuffleParagraphs() {
-        val keys = ArrayList(paragraphs.keys)
-//        Log.d(TAG, "Before shuffling keys:")
-//        logKeys()
-        keys.shuffle()
-//        Log.d(TAG, "After shuffling keys:")
-//        logKeys()
-        val shuffledMap = HashMap<String, ProblemSet>()
-        for (key in keys) {
-            shuffledMap[key] = paragraphs[key]!!
-        }
-        paragraphs = HashMap(shuffledMap)
-    }
+//        val keys = ArrayList(paragraphs.keys)
+////        Log.d(TAG, "Before shuffling keys:")
+////        logKeys()
+//        keys.shuffle()
+////        Log.d(TAG, "After shuffling keys:")
+////        logKeys()
+//        val shuffledMap = HashMap<String, ProblemSet>()
+//        for (key in keys) {
+//            shuffledMap[key] = paragraphs[key]!!
+//        }
+//        paragraphs = HashMap(shuffledMap)
 
-    private fun logKeys() {
-        for (key in paragraphs.keys) {
-            Log.d(TAG, "key = $key")
-        }
+        shuffledKeys = paragraphs.keys.toList() as ArrayList<String>
+        shuffledKeys.shuffle()
     }
 
     private fun initializeParagraphs() {
@@ -304,7 +314,7 @@ class ParagraphsActivity: AppCompatActivity() {
 
         var paragraph4 = "The shirt was on sale at the discount store for $19. Alice didn't have" +
                 " enough cash, so she decided to charge it on her credit card."
-        paragraphs[paragraph1] = ProblemSet(
+        paragraphs[paragraph4] = ProblemSet(
             "Paragraphs", mutableListOf<Problem>(
                 Problem(
                     "Was Alice buying pants?",
@@ -341,7 +351,7 @@ class ParagraphsActivity: AppCompatActivity() {
                 " couldn’t decide if he should mow the lawn first or wait until later. After" +
                 " listening to the weather forecast, Miguel decided to mow the lawn right" +
                 " away and do the other jobs later."
-        paragraphs[paragraph1] = ProblemSet(
+        paragraphs[paragraph5] = ProblemSet(
             "Paragraphs", mutableListOf<Problem>(
                 Problem(
                     "Was it a Friday afternoon?",
@@ -379,7 +389,7 @@ class ParagraphsActivity: AppCompatActivity() {
                 " hungry. Finally, they found a fast-food restaurant. They decided to go" +
                 " inside instead of using the drive-thru window. After eating, they began" +
                 " looking for a motel."
-        paragraphs[paragraph1] = ProblemSet(
+        paragraphs[paragraph6] = ProblemSet(
             "Paragraphs", mutableListOf<Problem>(
                 Problem(
                     "Had Mr. and Mrs. Montel been driving a long time?",
@@ -414,38 +424,58 @@ class ParagraphsActivity: AppCompatActivity() {
         problemIdCounter.set(0)
 
         var paragraph7 = "Wilma had been training for three months for the marathon race. She ran" +
-                "for two hours a day, swam for one hour a day, and worked out at the gym" +
-                "three times each week. The marathon was scheduled for April 22, just two" +
-                "weeks away. Wilma felt she was as ready as she’d ever be, and working" +
-                "out the next two weeks would keep her in top condition."
-        paragraphs[paragraph1] = ProblemSet(
+                " for two hours a day, swam for one hour a day, and worked out at the gym" +
+                " three times each week. The marathon was scheduled for April 22, just two" +
+                " weeks away. Wilma felt she was as ready as she’d ever be, and working" +
+                " out the next two weeks would keep her in top condition."
+        paragraphs[paragraph7] = ProblemSet(
             "Paragraphs", mutableListOf<Problem>(
                 Problem(
-                    "Had Mr. and Mrs. Montel been driving a long time?",
-                    "Yes",
-                    null,
-                    problemIdCounter.incrementAndGet()
-                ),
-                Problem(
-                    "Were they hungry?",
-                    "Yes",
-                    null,
-                    problemIdCounter.incrementAndGet()
-                ),
-                Problem(
-                    "Did they eat at home?",
+                    "Had Wilma been training for six months?",
                     "No",
                     null,
                     problemIdCounter.incrementAndGet()
                 ),
-                Problem("Did they eat inside the restaurant?",
+                Problem(
+                    "Did she plan to run in a marathon race?",
+                    "Yes",
+                    null,
+                    problemIdCounter.incrementAndGet()
+                ),
+                Problem(
+                    "Did Wilma run two hours a day?",
+                    "Yes",
+                    null,
+                    problemIdCounter.incrementAndGet()
+                ),
+                Problem("Did she swim daily?",
                     "Yes",
                     null,
                     problemIdCounter.incrementAndGet()),
-                Problem("Did they go right home after eating?",
+                Problem("Did she swim for two hours each day?",
                     "No",
                     null,
-                    problemIdCounter.incrementAndGet())
+                    problemIdCounter.incrementAndGet()),
+                Problem("Did Wilma go to a gym two times per week?",
+                    "No",
+                    null,
+                    problemIdCounter.incrementAndGet()),
+                Problem("Was the race scheduled for April 22?",
+                    "Yes",
+                    null,
+                    problemIdCounter.incrementAndGet()),
+                Problem("Was the race three weeks away?",
+                    "No",
+                    null,
+                    problemIdCounter.incrementAndGet()),
+                Problem("Did Wilma feel that she wasn’t ready for the race?",
+                    "No",
+                    null,
+                    problemIdCounter.incrementAndGet()),
+                Problem("Did she plan to work out the last two weeks before the race?",
+                    "Yes",
+                    null,
+                    problemIdCounter.incrementAndGet()),
             )
         )
 

@@ -11,6 +11,7 @@ import com.example.myapp.databinding.ActivityCategoryCardBinding
 import com.example.myapp.model.Category
 import com.example.myapp.view.demo.SolveActivity
 import com.example.myapp.view.paragraphs.ParagraphsActivity
+import com.example.myapp.view.synonyms.SynonymActivity
 
 private const val TAG : String = "RecyclerViewCategoryAdapter"
 
@@ -43,14 +44,21 @@ class RecyclerViewCategoryAdapter(private val context: Context, private val cate
 
         private fun startCategoryActivity(category: String) {
             Log.d(TAG, "Passed \"$category\" to startCategoryActivity")
-            if (category == "Paragraphs") {
-                val intent = Intent(context, ParagraphsActivity::class.java)
-                context.startActivity(intent)
-            } else {
-                val intent = Intent(context, SolveActivity::class.java)
-                intent.putExtra("category", category)
-                Log.d(TAG, "Attempting to start an activity...")
-                context.startActivity(intent)
+            when (category) {
+                "Paragraphs" -> {
+                    val intent = Intent(context, ParagraphsActivity::class.java)
+                    context.startActivity(intent)
+                }
+                "Synonym" -> {
+                    val intent = Intent(context, SynonymActivity::class.java)
+                    context.startActivity(intent)
+                }
+                else -> {
+                    val intent = Intent(context, SolveActivity::class.java)
+                    intent.putExtra("category", category)
+                    Log.d(TAG, "Attempting to start an activity...")
+                    context.startActivity(intent)
+                }
             }
         }
     }

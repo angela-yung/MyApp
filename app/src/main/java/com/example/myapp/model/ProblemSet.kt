@@ -1,7 +1,8 @@
 package com.example.myapp.model
 
+import android.util.Log
 import java.io.Serializable
-
+private const val TAG = "ProblemSet"
 class ProblemSet (private var category : String, private var problemList : MutableList<Problem>) :
     Serializable {
     fun getCategory() : String {
@@ -13,7 +14,8 @@ class ProblemSet (private var category : String, private var problemList : Mutab
     }
 
     fun getProblemSetCount() : Int {
-        return problemList.count()
+//        Log.d(TAG, "problemList.size = ${problemList.size}")
+        return problemList.size
     }
 
     override fun toString(): String {

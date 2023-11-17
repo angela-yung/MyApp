@@ -38,6 +38,11 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
         </activity>
+        <activity
+            android:name=".view.synonyms.SynonymActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
 
     </application>
 

@@ -12,6 +12,7 @@ private const val TAG = "SelectCategoryActivity"
 private const val PARAGRAPHS_CATEGORY = "Paragraphs"
 private const val HISTORY_CATEGORY = "History"
 private const val RANDOM_TRIVIA_CATEGORY = "Random Trivia"
+private const val SYNONYMS_ACTIVITY = "Synonym"
 
 class SelectCategoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectCategoryBinding
@@ -41,6 +42,8 @@ class SelectCategoryActivity : AppCompatActivity() {
         category = Category(HISTORY_CATEGORY, R.drawable.colosseum_icon)
         categoryList.add(category)
         category = Category(PARAGRAPHS_CATEGORY, R.drawable.colosseum_icon)
+        categoryList.add(category)
+        category = Category(SYNONYMS_ACTIVITY, R.drawable.colosseum_icon)
         categoryList.add(category)
 
         recyclerViewCategoryAdapter!!.notifyDataSetChanged()
