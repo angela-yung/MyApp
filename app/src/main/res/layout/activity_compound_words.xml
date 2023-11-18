@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/btn_backSynonym"
+        android:id="@+id/btn_backCompoundWords"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/back_arrow" />
 
     <TextView
-        android:id="@+id/tv_instructionsSynonym"
+        android:id="@+id/tv_instructionsCompoundWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,61 +31,61 @@
         tools:text="Some instructions..." />
 
     <TextView
-        android:id="@+id/tv_findSynonym"
+        android:id="@+id/tv_findCompoundWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_instructionsSynonym"
+        app:layout_constraintTop_toBottomOf="@+id/tv_instructionsCompoundWords"
         tools:text="e.g., rock" />
 
     <Button
-        android:id="@+id/btn_answer3Synonym"
+        android:id="@+id/btn_answer3CompoundWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_answer2Synonym"
-        app:layout_constraintTop_toBottomOf="@+id/tv_correctAnswerSynonym"
+        app:layout_constraintStart_toEndOf="@+id/btn_answer2CompoundWords"
+        app:layout_constraintTop_toBottomOf="@+id/tv_correctAnswerCompoundWords"
         app:layout_constraintVertical_bias="0.033"
         tools:text="hard" />
 
     <Button
-        android:id="@+id/btn_answer2Synonym"
+        android:id="@+id/btn_answer2CompoundWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_answer3Synonym"
+        app:layout_constraintEnd_toStartOf="@+id/btn_answer3CompoundWords"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_answer1Synonym"
-        app:layout_constraintTop_toBottomOf="@+id/tv_correctAnswerSynonym"
+        app:layout_constraintStart_toEndOf="@+id/btn_answer1CompoundWords"
+        app:layout_constraintTop_toBottomOf="@+id/tv_correctAnswerCompoundWords"
         app:layout_constraintVertical_bias="0.033"
         tools:text="stone" />
 
     <Button
-        android:id="@+id/btn_answer1Synonym"
+        android:id="@+id/btn_answer1CompoundWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_answer2Synonym"
+        app:layout_constraintEnd_toStartOf="@+id/btn_answer2CompoundWords"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_correctAnswerSynonym"
+        app:layout_constraintTop_toBottomOf="@+id/tv_correctAnswerCompoundWords"
         app:layout_constraintVertical_bias="0.033"
         tools:text="slide" />
 
     <TextView
-        android:id="@+id/tv_correctAnswerSynonym"
+        android:id="@+id/tv_correctAnswerCompoundWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_findSynonym"
+        app:layout_constraintTop_toBottomOf="@+id/tv_findCompoundWord"
         app:layout_constraintVertical_bias="0.035"
         tools:text="Correct!" />
 

@@ -38,21 +38,21 @@ class SynonymActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.tvSynonymInstructions.text = "Select the word that is most similar to the following word:"
-        defaultTint = binding.btnAnswer1.backgroundTintList!!
+        binding.tvInstructionsSynonym.text = "Select the word that is most similar to the following word:"
+        defaultTint = binding.btnAnswer1Synonym.backgroundTintList!!
         synonyms.shuffle()
         updateCurrentWordAssoc()
         updateDisplay()
 
-        binding.btnAnswer1.setOnClickListener() {
+        binding.btnAnswer1Synonym.setOnClickListener() {
             if (!isAnswerSelected) {
-                if (currentWordAssoc.synonym == binding.btnAnswer1.text) {
-                    binding.tvCorrectAnswer.text = "Correct"
-                    binding.btnAnswer1.backgroundTintList = ColorStateList.valueOf(Color.parseColor(CORRECT_BTN_COLOUR))
+                if (currentWordAssoc.synonym == binding.btnAnswer1Synonym.text) {
+                    binding.tvCorrectAnswerSynonym.text = "Correct"
+                    binding.btnAnswer1Synonym.backgroundTintList = ColorStateList.valueOf(Color.parseColor(CORRECT_BTN_COLOUR))
                     numCorrectAnswers++
                 } else {
-                    binding.tvCorrectAnswer.text = "The correct answer is \"${currentWordAssoc.synonym}\""
-                    binding.btnAnswer1.backgroundTintList = ColorStateList.valueOf(Color.parseColor(INCORRECT_BTN_COLOUR))
+                    binding.tvCorrectAnswerSynonym.text = "The correct answer is \"${currentWordAssoc.synonym}\""
+                    binding.btnAnswer1Synonym.backgroundTintList = ColorStateList.valueOf(Color.parseColor(INCORRECT_BTN_COLOUR))
                 }
                 isAnswerSelected = true
                 nextQuestion()
@@ -60,15 +60,15 @@ class SynonymActivity: AppCompatActivity() {
             }
         }
 
-        binding.btnAnswer2.setOnClickListener() {
+        binding.btnAnswer2Synonym.setOnClickListener() {
             if (!isAnswerSelected) {
-                if (currentWordAssoc.synonym == binding.btnAnswer2.text) {
-                    binding.tvCorrectAnswer.text = "Correct"
-                    binding.btnAnswer2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(CORRECT_BTN_COLOUR))
+                if (currentWordAssoc.synonym == binding.btnAnswer2Synonym.text) {
+                    binding.tvCorrectAnswerSynonym.text = "Correct"
+                    binding.btnAnswer2Synonym.backgroundTintList = ColorStateList.valueOf(Color.parseColor(CORRECT_BTN_COLOUR))
                     numCorrectAnswers++
                 } else {
-                    binding.tvCorrectAnswer.text = "The correct answer is \"${currentWordAssoc.synonym}\""
-                    binding.btnAnswer2.backgroundTintList = ColorStateList.valueOf(Color.parseColor(INCORRECT_BTN_COLOUR))
+                    binding.tvCorrectAnswerSynonym.text = "The correct answer is \"${currentWordAssoc.synonym}\""
+                    binding.btnAnswer2Synonym.backgroundTintList = ColorStateList.valueOf(Color.parseColor(INCORRECT_BTN_COLOUR))
                 }
                 isAnswerSelected = true
                 nextQuestion()
@@ -76,15 +76,15 @@ class SynonymActivity: AppCompatActivity() {
             }
         }
 
-        binding.btnAnswer3.setOnClickListener() {
+        binding.btnAnswer3Synonym.setOnClickListener() {
             if (!isAnswerSelected) {
-                if (currentWordAssoc.synonym == binding.btnAnswer3.text) {
-                    binding.tvCorrectAnswer.text = "Correct"
-                    binding.btnAnswer3.backgroundTintList = ColorStateList.valueOf(Color.parseColor(CORRECT_BTN_COLOUR))
+                if (currentWordAssoc.synonym == binding.btnAnswer3Synonym.text) {
+                    binding.tvCorrectAnswerSynonym.text = "Correct"
+                    binding.btnAnswer3Synonym.backgroundTintList = ColorStateList.valueOf(Color.parseColor(CORRECT_BTN_COLOUR))
                     numCorrectAnswers++
                 } else {
-                    binding.tvCorrectAnswer.text = "The correct answer is \"${currentWordAssoc.synonym}\""
-                    binding.btnAnswer3.backgroundTintList = ColorStateList.valueOf(Color.parseColor(INCORRECT_BTN_COLOUR))
+                    binding.tvCorrectAnswerSynonym.text = "The correct answer is \"${currentWordAssoc.synonym}\""
+                    binding.btnAnswer3Synonym.backgroundTintList = ColorStateList.valueOf(Color.parseColor(INCORRECT_BTN_COLOUR))
                 }
                 isAnswerSelected = true
                 nextQuestion()
@@ -94,7 +94,7 @@ class SynonymActivity: AppCompatActivity() {
 
 //        binding.btnNextSynonym.setOnClickListener() {
 //            if (synonyms.isEmpty()) {
-//                binding.tvCorrectAnswer.text = "You answered __ out of __ correctly."
+//                binding.tvCorrectAnswerSynonym.text = "You answered __ out of __ correctly."
 //            } else {
 //                updateCurrentWordAssoc()
 //                updateDisplay()
@@ -102,13 +102,13 @@ class SynonymActivity: AppCompatActivity() {
 //            }
 //        }
 
-        binding.btnBack2.setOnClickListener() {
+        binding.btnBackSynonym.setOnClickListener() {
             if (isFinished) {
                 returnToCategorySelection()
             } else {
                 displayResults()
                 synonyms.clear()
-                binding.btnBack2.visibility = android.view.View.GONE
+                binding.btnBackSynonym.visibility = android.view.View.GONE
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     returnToCategorySelection()
@@ -132,12 +132,12 @@ class SynonymActivity: AppCompatActivity() {
     }
 
     private fun displayResults() {
-        binding.tvSynonymInstructions.text = ""
+        binding.tvInstructionsSynonym.text = ""
         binding.tvFindSynonym.text = "You answered $numCorrectAnswers out of $numAttemptedQuestions correctly."
-        binding.tvCorrectAnswer.text = ""
-        binding.btnAnswer1.visibility = android.view.View.GONE
-        binding.btnAnswer2.visibility = android.view.View.GONE
-        binding.btnAnswer3.visibility = android.view.View.GONE
+        binding.tvCorrectAnswerSynonym.text = ""
+        binding.btnAnswer1Synonym.visibility = android.view.View.GONE
+        binding.btnAnswer2Synonym.visibility = android.view.View.GONE
+        binding.btnAnswer3Synonym.visibility = android.view.View.GONE
     }
 
     private fun returnToCategorySelection() {
@@ -157,25 +157,25 @@ class SynonymActivity: AppCompatActivity() {
         for (i in 0..< NUM_BUTTONS) {
             when (i) {
                 0 -> {
-                    binding.btnAnswer1.text = buttonOptions[i]}
+                    binding.btnAnswer1Synonym.text = buttonOptions[i]}
                 1 -> {
-                    binding.btnAnswer2.text = buttonOptions[i]
+                    binding.btnAnswer2Synonym.text = buttonOptions[i]
                 }
                 else -> {
-                    binding.btnAnswer3.text = buttonOptions[i]
+                    binding.btnAnswer3Synonym.text = buttonOptions[i]
                 }
             }
         }
-        binding.tvCorrectAnswer.text = ""
+        binding.tvCorrectAnswerSynonym.text = ""
         resetBtnColours()
     }
 
     private fun resetBtnColours() {
-//        Log.d(TAG, "Default btn colour = ${binding.btnAnswer1.backgroundTintList}")
+//        Log.d(TAG, "Default btn colour = ${binding.btnAnswer1Synonym.backgroundTintList}")
         // set button to default theme colour
-        binding.btnAnswer1.backgroundTintList = defaultTint
-        binding.btnAnswer2.backgroundTintList = defaultTint
-        binding.btnAnswer3.backgroundTintList = defaultTint
+        binding.btnAnswer1Synonym.backgroundTintList = defaultTint
+        binding.btnAnswer2Synonym.backgroundTintList = defaultTint
+        binding.btnAnswer3Synonym.backgroundTintList = defaultTint
     }
 
     private fun randomizeOptions(): ArrayList<String> {
@@ -187,7 +187,7 @@ class SynonymActivity: AppCompatActivity() {
         return options
     }
     private fun initializeSynonyms() {
-        synonyms = ArrayList<WordAssociation>( listOf(
+        synonyms = arrayListOf(
             WordAssociation("rock", "stone", "slide", "hard"),
             WordAssociation("exit", "leave", "window", "late"),
             WordAssociation("pants", "trousers", "clothing", "legs"),
@@ -221,7 +221,8 @@ class SynonymActivity: AppCompatActivity() {
             WordAssociation("plain", "bland", "spicy", "blend"),
             WordAssociation("starved", "hungry", "full", "food"),
             WordAssociation("gift", "present", "bow", "birthday"),
-            WordAssociation("loud", "noisy", "whisper", "voice"))
+            WordAssociation("loud", "noisy", "whisper", "voice")
         )
+
     }
 }
